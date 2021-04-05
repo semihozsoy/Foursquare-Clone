@@ -13,6 +13,8 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     var locationManager = CLLocationManager()
+    var choosenLatitude = ""
+    var choosenLongitude = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,33 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        
+        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(chooseLocation(gestureRecognizer: )))
+        recognizer.minimumPressDuration = 3
+        mapView.addGestureRecognizer(recognizer)
+        
+    }
+    
+    
+    @objc func chooseLocation(gestureRecognizer: UIGestureRecognizer){
+        
+        if gestureRecognizer.state == UIGestureRecognizer.State.began {
+            
+            let touches = gestureRecognizer.location(in: self.mapView)
+            let coordinates = self.mapView.convert(touches, toCoordinateFrom: self.mapView)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinates
+            
+            annotation.title = PlaceModel.sharedInstance.placeName
+            annotation.subtitle = PlaceModel.sharedInstance.placeType
+            
+            self.mapView.addAnnotation(annotation)
+            
+            self.choosenLatitude = String(coordinates.latitude)
+            self.choosenLongitude = String(coordinates.longitude)
+            
+        }
         
     }
     
