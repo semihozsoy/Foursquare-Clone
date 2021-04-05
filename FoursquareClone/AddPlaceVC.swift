@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddPlaceVC: UIViewController {
+class AddPlaceVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var placeNameText: UITextField!
     
@@ -31,7 +31,27 @@ class AddPlaceVC: UIViewController {
     
     @objc func chooseImage(){
         
+        // fotoğrafı seçmek için gereken kodları burda yazdık
+        
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        self.present(picker , animated: true, completion: nil)
+        
     }
+    
+    // seçildikten sonra ne olacağına karar verdiğimiz kısım burası
+    // didfinishpicking diye yazdığımızda bu fonksiyon gelecek
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        placeImageView.image = info[.originalImage] as? UIImage
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     
 
     @IBAction func nextButtonClicked(_ sender: Any) {
