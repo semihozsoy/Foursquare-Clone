@@ -29,16 +29,7 @@ class AddPlaceVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         
     }
     
-    @objc func chooseImage(){
-        
-        // fotoğrafı seçmek için gereken kodları burda yazdık
-        
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.sourceType = .photoLibrary
-        self.present(picker , animated: true, completion: nil)
-        
-    }
+
     
     // seçildikten sonra ne olacağına karar verdiğimiz kısım burası
     // didfinishpicking diye yazdığımızda bu fonksiyon gelecek
@@ -56,8 +47,45 @@ class AddPlaceVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
 
     @IBAction func nextButtonClicked(_ sender: Any) {
         
+        if placeTypeText != nil && placeAtAtmosphere != nil && placeNameText != nil {
+            
+            if let chooseImage = placeImageView.image{
+                
+                // singleton yapısının kullanımı
+                
+                let placeModel = PlaceModel.sharedInstance
+                placeModel.placeName = placeNameText.text!
+                placeModel.placeType = placeTypeText.text!
+                placeModel.placeAtmosphere = placeAtAtmosphere.text!
+                placeModel.placeImage = chooseImage
+            
+        }
         performSegue(withIdentifier: "toMapVC", sender: nil)
-    }
-    
-
+        }
+        else {
+            
+            let alert = UIAlertController(title: "Error", message: "name or type or atmosphere ??", preferredStyle: UIAlertController.Style.alert)
+            let okButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+            alert.addAction(okButton)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
 }
+    
+    
+    @objc func chooseImage(){
+        
+        // fotoğrafı seçmek için gereken kodları burda yazdık
+        
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        self.present(picker , animated: true, completion: nil)
+        
+    }
+        
+        
+    
+}
+
+

@@ -17,6 +17,7 @@
 		11D495E82619DBD000201AE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D495E62619DBD000201AE4 /* Main.storyboard */; };
 		11D495EA2619DBD300201AE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11D495E92619DBD300201AE4 /* Assets.xcassets */; };
 		11D495ED2619DBD300201AE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D495EB2619DBD300201AE4 /* LaunchScreen.storyboard */; };
+		11DCB30C261B3BAD00800A35 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DCB30B261B3BAD00800A35 /* PlaceModel.swift */; };
 		BF5EF6DB424DA7D53D8DD713 /* Pods_FoursquareClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C6DEEE030C540DC7B220ED /* Pods_FoursquareClone.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		11D495E92619DBD300201AE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11D495EC2619DBD300201AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11D495EE2619DBD300201AE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11DCB30B261B3BAD00800A35 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		35C6DEEE030C540DC7B220ED /* Pods_FoursquareClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoursquareClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AAEA2F92402231D4946A93B /* Pods-FoursquareClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoursquareClone.debug.xcconfig"; path = "Target Support Files/Pods-FoursquareClone/Pods-FoursquareClone.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +79,7 @@
 				118F0C6B261A001F009950B4 /* PlacesVC.swift */,
 				118F0C70261A0F71009950B4 /* AddPlaceVC.swift */,
 				118F0C74261A5072009950B4 /* MapVC.swift */,
+				11DCB30B261B3BAD00800A35 /* PlaceModel.swift */,
 				118F0C78261A57FB009950B4 /* DetailsVC.swift */,
 				11D495E62619DBD000201AE4 /* Main.storyboard */,
 				11D495E92619DBD300201AE4 /* Assets.xcassets */,
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11D495E52619DBD000201AE4 /* SignUpVC.swift in Sources */,
+				11DCB30C261B3BAD00800A35 /* PlaceModel.swift in Sources */,
 				118F0C75261A5072009950B4 /* MapVC.swift in Sources */,
 				11D495E12619DBD000201AE4 /* AppDelegate.swift in Sources */,
 				118F0C6C261A001F009950B4 /* PlacesVC.swift in Sources */,
