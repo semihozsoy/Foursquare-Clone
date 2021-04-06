@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import Parse
 
 class DetailsVC: UIViewController {
     
@@ -17,10 +18,26 @@ class DetailsVC: UIViewController {
     
     @IBOutlet weak var detailsMapView: MKMapView!
     
+    var chosenPlaceId = ""
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+     let query = PFQuery(className: "places")
+        query.whereKey("objectId", equalTo: chosenPlaceId)
+        query.findObjectsInBackground { (objects, error) in
+            if error != nil {
+                let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: UIAlertController.Style.alert)
+                let okButton = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil)
+                alert.addAction(okButton)
+                self.present(alert, animated: true, completion: nil)
+            }
+            else {
+                print(objects)
+            }
+        }
+        
     }
     
 
