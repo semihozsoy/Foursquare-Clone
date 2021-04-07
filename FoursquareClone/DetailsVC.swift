@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import Parse
 
-class DetailsVC: UIViewController {
+class DetailsVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
     @IBOutlet weak var detailsImageView: UIImageView!
     @IBOutlet weak var detailsNameLabel: UILabel!
@@ -27,6 +27,9 @@ class DetailsVC: UIViewController {
 
    getDataFromParse()
         
+        detailsMapView.delegate = self
+        
+        
     }
     
     func getDataFromParse() {
@@ -40,6 +43,9 @@ class DetailsVC: UIViewController {
                    self.present(alert, animated: true, completion: nil)
                }
                else {
+                
+                //OBJECTS
+                
                    if objects != nil {
                        if objects!.count > 0 {
                            let chosenPlaceObject = objects![0]
@@ -77,6 +83,23 @@ class DetailsVC: UIViewController {
                                    }
                                }
                            }
+                        // MAPS 'E AKTARMA KISMI
+                        
+                        let location = CLLocationCoordinate2D(latitude: self.chosenLatitude, longitude: self.chosenLongitude)
+                        
+                        let span = MKCoordinateSpan(latitudeDelta: 0.035, longitudeDelta: 0.035)
+                        
+                        let region = MKCoordinateRegion(center: location, span: span)
+                        
+                        self.detailsMapView.setRegion(region, animated: true)
+                        
+                        let annotation = MKPointAnnotation()
+                        
+                        annotation.coordinate = location
+                        annotation.title = self.detailsNameLabel.text!
+                        annotation.subtitle = self.detailsTypeLabel.text!
+                        self.detailsMapView.addAnnotation(annotation)
+                        
                            
                        }
                    }
@@ -84,7 +107,24 @@ class DetailsVC: UIViewController {
            }
     }
     
-
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView?.canShowCallout = true
+            let button = UIButton(type: .detailDisclosure)
+            
+            // missing codes
+        }
+    }
    
 
 }
