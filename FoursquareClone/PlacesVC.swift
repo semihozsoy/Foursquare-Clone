@@ -29,6 +29,10 @@ class PlacesVC: UIViewController, UITableViewDelegate,UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
     
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getDataFromParse()
     }
     
@@ -41,12 +45,11 @@ class PlacesVC: UIViewController, UITableViewDelegate,UITableViewDataSource {
                 self.makeAlert(titleInput: "Error", messageInput: error?.localizedDescription ?? "Error")
             } else {
                 if objects != nil {
+                    self.placeIdArray.removeAll(keepingCapacity: false)
+                    self.placeNameArray.removeAll(keepingCapacity: false)
                     
                     for object in objects! {
-                        
-                        self.placeIdArray.removeAll(keepingCapacity: false)
-                        self.placeNameArray.removeAll(keepingCapacity: false)
-                        
+                    
                         if let placeName = object.object(forKey: "name") as? String {
                             
                             if let placeId = object.objectId {

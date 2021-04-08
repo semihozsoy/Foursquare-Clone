@@ -14,8 +14,8 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     var locationManager = CLLocationManager()
-    var choosenLatitude = ""
-    var choosenLongitude = ""
+    var chosenLatitude = ""
+    var chosenLongitude = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +55,8 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             
             self.mapView.addAnnotation(annotation)
             
-            self.choosenLatitude = String(coordinates.latitude)
-            self.choosenLongitude = String(coordinates.longitude)
+            self.chosenLatitude = String(coordinates.latitude)
+            self.chosenLongitude = String(coordinates.longitude)
             
         }
         
@@ -83,8 +83,8 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         object["name"] = placeModel.placeName
         object["type"] = placeModel.placeType
         object["atmosphere"] = placeModel.placeAtmosphere
-        object["longitude"] = placeModel.longitude
-        object["latitude"] = placeModel.latitude
+        object["longitude"] = self.chosenLongitude
+        object["latitude"] = self.chosenLatitude
         
         // Görsel kaydetmek için farklı bir işlem uygulamamız gerekiyor
         
