@@ -107,22 +107,55 @@ class DetailsVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
            }
     }
     
+    //Adding navigation
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if annotation is MKUserLocation {
+            
             return nil
         }
-        
         let reuseId = "pin"
-        
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
         
         if pinView == nil {
+            
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView?.canShowCallout = true
             let button = UIButton(type: .detailDisclosure)
+            pinView?.rightCalloutAccessoryView = button
             
-            // missing codes
+        }else {
+            pinView?.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    // bu fonksiyon bize bir detail kısmı cıkaracak o kısımda bizi alıp navigasyona götürüyor
+    // güncel yerim nerdeyse oraya arabayla nasıl giderim bana bunu gösteriyor
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if self.chosenLongitude != 0.0 && chosenLatitude != 0.0 {
+            
+            let requestLocation = CLLocation(latitude: chosenLatitude, longitude: chosenLongitude)
+            
+            // koordinatlar ve yerler arasındaki bilgiyi bize verecek
+            
+            CLGeocoder().reverseGeocodeLocation(requestLocation) { (placemarks, error) in
+                if let placemark = placemarks {
+                    
+                    if placemark.count > 0 {
+                        
+                        let mkPlaceMark = MKPlacemark(placemark: placemark[0])
+                        let mapItem = MKMapItem(placemark: mkPlaceMark)
+                        mapItem.name = self.detailsNameLabel.text
+                        
+                        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+                        mapItem.openInMaps(launchOptions: launchOptions)
+                    }
+                }
+            }
         }
     }
    
