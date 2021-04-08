@@ -134,6 +134,7 @@ class DetailsVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
     // bu fonksiyon bize bir detail kısmı cıkaracak o kısımda bizi alıp navigasyona götürüyor
     // güncel yerim nerdeyse oraya arabayla nasıl giderim bana bunu gösteriyor
+    // bu fonksiyonumuz için önemli bir özellik 
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if self.chosenLongitude != 0.0 && chosenLatitude != 0.0 {
